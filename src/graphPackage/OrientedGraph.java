@@ -1,13 +1,12 @@
 package graphPackage;
 
-import graphPackage.Edge.Edge;
 import graphPackage.Edge.OrientedEdge;
 import graphPackage.Node.Node;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrientedGraph<NODE_VALUE_T,EDGE_VALUE_T,EDGE_TYPE extends OrientedEdge<EDGE_VALUE_T,NODE_VALUE_T>> extends Graph<NODE_VALUE_T,EDGE_VALUE_T,EDGE_TYPE>{
+public class OrientedGraph<NODE_VALUE_T,EDGE_VALUE_T> extends Graph<NODE_VALUE_T,EDGE_VALUE_T,OrientedEdge<EDGE_VALUE_T,NODE_VALUE_T>>{
 
 
     /*
@@ -20,9 +19,10 @@ public class OrientedGraph<NODE_VALUE_T,EDGE_VALUE_T,EDGE_TYPE extends OrientedE
      */
 
 
-    static List<Boolean> computeOrientedGraph(OrientedGraph<?,?,?> graph,List<Node<?>> path)
+    static List<Boolean> computeOrientedGraph(OrientedGraph<?,?> graph,List<Node<?>> path)
     {
         List<Boolean> proprieties = new ArrayList<>();
+
 
 
 
