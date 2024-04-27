@@ -1,14 +1,21 @@
 package graphPackage;
 
-import java.util.List;
+import graphPackage.Edge.Edge;
+import graphPackage.Node.AbstractNode;
+import graphPackage.Node.Node;
 
-public interface GraphInterface<U extends Node,E extends Branches<U>> {
+public interface GraphInterface<NODE_VALUE_T,EDGE_VALUE_T,EDGE_TYPE extends Edge<EDGE_VALUE_T,NODE_VALUE_T>> {
 
-    void addNode(U node);
-    void addAllNodes(List<U> nodes);
-    void deleteNode(U node);
-    void addBranch(E branch);
-    void addAllBranches(List<E> branches);
+    void addNodes(Node<NODE_VALUE_T> node);
+    Node<NODE_VALUE_T> removeNodes(Node<NODE_VALUE_T> node);
+    boolean containsNode(Node<NODE_VALUE_T> node);
+    void addEdge(EDGE_TYPE edge);
+    EDGE_TYPE removeEdge(EDGE_TYPE edge);
+    void setEdgeWeight(EDGE_TYPE edge, EDGE_VALUE_T value );
+    boolean containsEdge(EDGE_TYPE edge);
+    boolean isSubGraph(Graph<NODE_VALUE_T,EDGE_VALUE_T,EDGE_TYPE> g2);
+    boolean isAcyclicGraph();
+    Graph<NODE_VALUE_T,EDGE_VALUE_T,EDGE_TYPE> union(Graph<NODE_VALUE_T,EDGE_VALUE_T,EDGE_TYPE> g2);
 
-    void deleteBranch(E branches);
+
 }
