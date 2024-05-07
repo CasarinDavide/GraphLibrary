@@ -9,6 +9,22 @@ public class NonOrientedEdge<T,U> extends Edge<T,U>{
     }
 
     @Override
+    public boolean isStartNode(Node<U> node) {
+        return false;
+    }
+
+    @Override
+    public boolean isToNode(Node<U> node) {
+        return false;
+    }
+
+    @Override
+    public Node<U> getToDestination(Node<U> node) {
+        return null;
+    }
+
+
+    @Override
     public boolean equals(Object obj) {
 
         if (obj instanceof NonOrientedEdge<?, ?> edge)

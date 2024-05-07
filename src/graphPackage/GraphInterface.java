@@ -4,6 +4,10 @@ import graphPackage.Edge.Edge;
 import graphPackage.Node.AbstractNode;
 import graphPackage.Node.Node;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public interface GraphInterface<NODE_VALUE_T,EDGE_VALUE_T,EDGE_TYPE extends Edge<EDGE_VALUE_T,NODE_VALUE_T>> {
 
     void addNodes(Node<NODE_VALUE_T> node);
@@ -15,7 +19,13 @@ public interface GraphInterface<NODE_VALUE_T,EDGE_VALUE_T,EDGE_TYPE extends Edge
     boolean containsEdge(EDGE_TYPE edge);
     boolean isSubGraph(Graph<NODE_VALUE_T,EDGE_VALUE_T,EDGE_TYPE> g2);
     boolean isAcyclicGraph();
-    Graph<NODE_VALUE_T,EDGE_VALUE_T,EDGE_TYPE> union(Graph<NODE_VALUE_T,EDGE_VALUE_T,EDGE_TYPE> g2);
+    public abstract double graphDensity();
+    void breadthFirstSearch(Node<NODE_VALUE_T> node, Map<Node<NODE_VALUE_T>, Boolean> visitedMap);
 
+    public abstract int getNodeDegree(Node<NODE_VALUE_T > node);
+
+    public abstract int isRegularGraph();
+
+    public abstract List<Node<NODE_VALUE_T>> getAllIsolatedVertex();
 
 }

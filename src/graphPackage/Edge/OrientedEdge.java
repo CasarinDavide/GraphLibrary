@@ -18,6 +18,11 @@ public class OrientedEdge<T,U> extends Edge<T,U>{
         return node == this.node2;
     }
 
+    @Override
+    public Node<U> getToDestination(Node<U> node) {
+        return null;
+    }
+
 
     @Override
     public boolean equals(Object obj) {
