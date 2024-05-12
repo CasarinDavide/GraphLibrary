@@ -7,8 +7,8 @@ import java.util.*;
 
 public abstract class Graph<NODE_VALUE_T,EDGE_VALUE_T,EDGE_TYPE extends Edge<EDGE_VALUE_T,NODE_VALUE_T>> implements GraphInterface<NODE_VALUE_T,EDGE_VALUE_T,EDGE_TYPE> {
 
-    List<Node<NODE_VALUE_T>> nodesList;
-    List<EDGE_TYPE> edgesList;
+    List<Node<NODE_VALUE_T>> nodesList = new ArrayList<>();
+    List<EDGE_TYPE> edgesList = new ArrayList<>();
 
     public Graph()
     {
@@ -17,9 +17,16 @@ public abstract class Graph<NODE_VALUE_T,EDGE_VALUE_T,EDGE_TYPE extends Edge<EDG
 
     public Graph(List<Node<NODE_VALUE_T>> nodes, List<EDGE_TYPE> edges)
     {
-        this.nodesList = nodes;
-        this.edgesList = edges;
+        this(nodes);
+        this.edgesList.addAll(edges);
     }
+
+
+    public Graph(List<Node<NODE_VALUE_T>> nodes)
+    {
+        this.nodesList.addAll(nodes);
+    }
+
 
     @Override
     public void addNodes(Node<NODE_VALUE_T> node) {
@@ -236,5 +243,29 @@ public abstract class Graph<NODE_VALUE_T,EDGE_VALUE_T,EDGE_TYPE extends Edge<EDG
 
         return isolated_vertex;
     }
+
+
+    public List<Node<NODE_VALUE_T>> getAllAdjacentNode(Node<NODE_VALUE_T> node)
+    {
+        List<Node<NODE_VALUE_T>> adjList = new ArrayList<>();
+        for (EDGE_TYPE edge: this.edgesList) {
+            if (edge.isStartNode(node))
+                adjList.add(edge.getToDestination(node));
+        }
+
+        return adjList;
+    }
+
+
+    public List<EDGE_TYPE> getAllAdjacentEdge(Node<NODE_VALUE_T> node)
+    {
+        List<EDGE_TYPE> adjList = new ArrayList<>();
+        for (EDGE_TYPE edge: this.edgesList) {
+            if (edge.isStartNode(node))
+                adjList.add(edge);
+        }
+        return adjList;
+    }
+
 
 }
