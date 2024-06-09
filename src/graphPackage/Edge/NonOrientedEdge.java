@@ -8,19 +8,34 @@ public class NonOrientedEdge<T,U> extends Edge<T,U>{
         super(value, node1, node2);
     }
 
+    /**
+     * In an undirected graph there is not a real direction so, iff node exsists in the edge then its a starting node and even an destination node
+     * @param node
+     * @return
+     */
     @Override
     public boolean isStartNode(Node<U> node) {
-        return false;
+        return this.getNode1().equals(node) || this.getNode2().equals(node);
     }
 
     @Override
     public boolean isToNode(Node<U> node) {
-        return false;
+        return this.getNode1().equals(node) || this.getNode2().equals(node);
     }
 
     @Override
     public Node<U> getToDestination(Node<U> node) {
-        return null;
+
+        if (!this.isStartNode(node))
+            return null;
+        else
+        {
+            if (this.getNode2() == node)
+                return this.getNode1();
+            else
+                return this.getNode2();
+        }
+
     }
 
 

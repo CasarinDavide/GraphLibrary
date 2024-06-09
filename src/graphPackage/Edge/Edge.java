@@ -24,7 +24,7 @@ public abstract class Edge<EDGE_VALUE_T,NODE_TYPE> extends AbstractEdge{
     public static<EDGE_VALUE_T> List<EDGE_VALUE_T> sortEdge(List<EDGE_VALUE_T> edgeList, Comparator<EDGE_VALUE_T> comparator)
     {
         List<EDGE_VALUE_T> edgeList1 = new ArrayList<>(edgeList);
-        Functions.mergeSort(edgeList1,0,edgeList1.size(),comparator);
+        Functions.mergeSort(edgeList1,0,edgeList1.size()-1,comparator);
         return edgeList1;
     }
     public Edge(EDGE_VALUE_T value,Node<NODE_TYPE> node1, Node<NODE_TYPE> node2)

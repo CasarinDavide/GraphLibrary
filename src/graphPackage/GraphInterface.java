@@ -32,4 +32,7 @@ public interface GraphInterface<NODE_VALUE_T,EDGE_VALUE_T,EDGE_TYPE extends Edge
 
     public abstract List<EDGE_TYPE> getAllAdjacentEdge(Node<NODE_VALUE_T> node);
 
+    public List<Node<NODE_VALUE_T>> getAllNodes();
+    public List<EDGE_TYPE> getAllEdges();
+
 }

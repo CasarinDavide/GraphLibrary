@@ -5,8 +5,8 @@ import java.util.*;
 public class DisjointSetTree<ELEMENT_TYPE> implements DisjointSet<ELEMENT_TYPE>{
 
 
-    private Map<ELEMENT_TYPE,ELEMENT_TYPE> elements;
-    private Map<ELEMENT_TYPE,Integer> ranks;
+    private final Map<ELEMENT_TYPE,ELEMENT_TYPE> elements;
+    private final Map<ELEMENT_TYPE,Integer> ranks;
 
     public DisjointSetTree()
     {
@@ -30,11 +30,11 @@ public class DisjointSetTree<ELEMENT_TYPE> implements DisjointSet<ELEMENT_TYPE>{
     @Override
     public ELEMENT_TYPE findSet(ELEMENT_TYPE element) {
 
-        if (elements.get(element) == element)
+        if (elements.get(element).equals(element))
             return element;
         else
         {
-            ELEMENT_TYPE parent = findSet(element);
+            ELEMENT_TYPE parent = findSet(elements.get(element));
             elements.put(element,parent);
             return elements.get(element);
         }

@@ -10,8 +10,15 @@ public class PredecessorGraph<NODE_VALUE,EDGE_TYPE extends Edge> implements Comp
     private Map<Node<NODE_VALUE>,PredecessorNode<NODE_VALUE,EDGE_TYPE>> predecessorNodeList;
     private Node<NODE_VALUE> source_index;
 
+    private PredecessorGraph()
+    {
+        this.predecessorNodeList = new HashMap<>();
+    }
+
     public PredecessorGraph(List<Node<NODE_VALUE>> nodeList, Node<NODE_VALUE> source,Comparator<EDGE_TYPE> comparator)
     {
+        this();
+
         Iterator<Node<NODE_VALUE>> it = nodeList.iterator();
         while (it.hasNext())
         {
@@ -27,6 +34,11 @@ public class PredecessorGraph<NODE_VALUE,EDGE_TYPE extends Edge> implements Comp
     public EDGE_TYPE getNodeKey(Node<NODE_VALUE> node)
     {
         return predecessorNodeList.get(node).getKey();
+    }
+
+    public PredecessorNode<NODE_VALUE,EDGE_TYPE> getPredecessorNode(Node<NODE_VALUE> node)
+    {
+        return predecessorNodeList.get(node);
     }
 
     public void setNodeKey(Node<NODE_VALUE> node,EDGE_TYPE key)
@@ -53,10 +65,16 @@ public class PredecessorGraph<NODE_VALUE,EDGE_TYPE extends Edge> implements Comp
 
     @Override
     public int compare(Object o1, Object o2) {
-        if (o1 instanceof PredecessorNode && o2 instanceof PredecessorNode)
+        if (o1 instanceof Comparable<?>  && o2 instanceof Comparable<?>)
         {
             PredecessorNode<NODE_VALUE, EDGE_TYPE> edge1 = (PredecessorNode<NODE_VALUE, EDGE_TYPE>) o1;
             PredecessorNode<NODE_VALUE, EDGE_TYPE> edge2 = (PredecessorNode<NODE_VALUE, EDGE_TYPE>) o2;
+            return edge1.compareTo(edge2);
+        }
+        else if (o1 instanceof PredecessorNode && o2 instanceof Edge<?,?>)
+        {
+            PredecessorNode<NODE_VALUE, EDGE_TYPE> edge1 = (PredecessorNode<NODE_VALUE, EDGE_TYPE>) o1;
+            Edge<NODE_VALUE, EDGE_TYPE> edge2 = (Edge<NODE_VALUE, EDGE_TYPE>) o2;
             return edge1.compareTo(edge2);
         }
         else

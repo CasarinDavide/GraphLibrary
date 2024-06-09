@@ -1,13 +1,11 @@
 package graphPackage;
 
 import graphPackage.Edge.Edge;
+import graphPackage.Edge.NonOrientedEdge;
 import graphPackage.Edge.OrientedEdge;
 import graphPackage.Node.Node;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 
 public class OrientedGraph<NODE_VALUE_T,EDGE_VALUE_T> extends Graph<NODE_VALUE_T,EDGE_VALUE_T,OrientedEdge<EDGE_VALUE_T,NODE_VALUE_T>>{
@@ -46,6 +44,14 @@ public class OrientedGraph<NODE_VALUE_T,EDGE_VALUE_T> extends Graph<NODE_VALUE_T
         return isoGraph;
     }
 
+
+    /***
+     *
+     * Gives information about the graph given a walk
+     * @param graph
+     * @param path
+     * @return List of proprieties
+     */
     public static List<Boolean> computeOrientedGraph(OrientedGraph<?, ?> graph, List<Node<Integer>> path)
     {
         List<Boolean> proprieties = new ArrayList<>();
@@ -102,6 +108,7 @@ public class OrientedGraph<NODE_VALUE_T,EDGE_VALUE_T> extends Graph<NODE_VALUE_T
         return proprieties;
 
     }
+
 
 
 }

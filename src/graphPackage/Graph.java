@@ -107,6 +107,12 @@ public abstract class Graph<NODE_VALUE_T,EDGE_VALUE_T,EDGE_TYPE extends Edge<EDG
 
     }
 
+
+    /**
+     * subgraph given G(V,E) G'(V',E') is subgraph iff V' ⊆ V and E' ⊆ V' x V'
+     * @param g2 graph(V,E)
+     * @return
+     */
     @Override
     public boolean isSubGraph(Graph<NODE_VALUE_T, EDGE_VALUE_T, EDGE_TYPE> g2) {
 
@@ -115,8 +121,9 @@ public abstract class Graph<NODE_VALUE_T,EDGE_VALUE_T,EDGE_TYPE extends Edge<EDG
                 return false;
         }
 
-        for (EDGE_TYPE edge: g2.edgesList) {
-            if (!this.containsEdge(edge))
+        for(EDGE_TYPE edge : g2.edgesList)
+        {
+            if(!g2.nodesList.contains(edge.getNode1()) || !g2.nodesList.contains(edge.getNode2()))
                 return false;
         }
 
@@ -267,5 +274,13 @@ public abstract class Graph<NODE_VALUE_T,EDGE_VALUE_T,EDGE_TYPE extends Edge<EDG
         return adjList;
     }
 
+    @Override
+    public List<Node<NODE_VALUE_T>> getAllNodes() {
+        return this.nodesList;
+    }
 
+    @Override
+    public List<EDGE_TYPE> getAllEdges() {
+        return this.edgesList;
+    }
 }

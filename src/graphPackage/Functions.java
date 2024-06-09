@@ -66,66 +66,54 @@ public class Functions {
         }
     }
 
-    public static<VALUE_TYPE,T extends List<VALUE_TYPE>> void mergeSort(T list, int start, int end, Comparator<VALUE_TYPE> comparator)
-    {
-        if (start >= end)
-        {
-            return;
-        }
-        else
-        {
+    public static <VALUE_TYPE, T extends List<VALUE_TYPE>> void mergeSort(T list, int start, int end, Comparator<VALUE_TYPE> comparator) {
+        if (start < end) {
             int q = (start + end) / 2;
-            mergeSort(list,start,q,comparator);
-            mergeSort(list,q,end,comparator);
-            merge(list,start,q,end,comparator);
+            mergeSort(list, start, q, comparator);
+            mergeSort(list, q + 1, end, comparator);
+            merge(list, start, q, end, comparator);
         }
     }
 
+    public static <VALUE_TYPE, T extends List<VALUE_TYPE>> void merge(T list, int start, int q, int end, Comparator<VALUE_TYPE> comparator) {
+        List<VALUE_TYPE> l = new ArrayList<>(q - start + 1);
+        List<VALUE_TYPE> r = new ArrayList<>(end - q);
 
-    public static<VALUE_TYPE,T extends List<VALUE_TYPE>> void merge(T list,int start,int q, int end,Comparator<VALUE_TYPE> comparator)
-    {
-        List<VALUE_TYPE> l = new ArrayList<>();
-        List<VALUE_TYPE> r = new ArrayList<>();
-
-        for (int i = start; i < q; i++) {
+        // Copy data to temp lists
+        for (int i = start; i <= q; i++) {
             l.add(list.get(i));
         }
-
-        for (int i = q; i < end; i++) {
+        for (int i = q + 1; i <= end; i++) {
             r.add(list.get(i));
         }
 
-        int inserted_l = 0;
-        int inserted_r = 0;
-        int inserted = 0;
-
-
-        while (inserted_l < l.size() && inserted_r < r.size()) {
-            if (comparator.compare(l.get(inserted_l),r.get(inserted_r)) <= 0) {
-                inserted_r++;
-                list.set(inserted,r.get(inserted_r));
+        int i = 0, j = 0;
+        int k = start;
+        while (i < l.size() && j < r.size()) {
+            if (comparator.compare(l.get(i), r.get(j)) <= 0) {
+                list.set(k, l.get(i));
+                i++;
             } else {
-                inserted_l++;
-                list.set(inserted,l.get(inserted_l));
+                list.set(k, r.get(j));
+                j++;
             }
-            inserted++;
+            k++;
         }
 
-        while (inserted_l < l.size())
-        {
-            list.set(inserted,l.get(inserted_l));
-            inserted++;
-            inserted_l++;
+        // Copy remaining elements of l[], if any
+        while (i < l.size()) {
+            list.set(k, l.get(i));
+            i++;
+            k++;
         }
 
-        while (inserted_r < r.size())
-        {
-            list.set(inserted,r.get(inserted_r));
-            inserted++;
-            inserted_r++;
+        // Copy remaining elements of r[], if any
+        while (j < r.size()) {
+            list.set(k, r.get(j));
+            j++;
+            k++;
         }
     }
-
 
 
 }

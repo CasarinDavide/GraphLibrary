@@ -11,7 +11,6 @@ public class Node<T>  extends AbstractNode{
 
     @Override
     public int hashCode() {
-
         /* TODO IMPLEMENT HASHCODE */
         return super.hashCode();
     }
@@ -24,6 +23,11 @@ public class Node<T>  extends AbstractNode{
         }
 
         return false;
+    }
+
+    public T getIdentifier()
+    {
+        return this.identifier;
     }
 
 }

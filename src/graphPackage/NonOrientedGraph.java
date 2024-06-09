@@ -72,7 +72,7 @@ public class NonOrientedGraph<NODE_VALUE_T,EDGE_VALUE_T> extends Graph<NODE_VALU
         {
             PredecessorNode<NODE_VALUE_T,NonOrientedEdge<EDGE_VALUE_T,NODE_VALUE_T>> predecessorNode = queue.poll();
 
-            if (!visitedProdecessorNode.get(predecessorNode))
+            if (visitedProdecessorNode.get(predecessorNode) == null)
             {
                 visitedProdecessorNode.put(predecessorNode,true);
 
@@ -81,7 +81,7 @@ public class NonOrientedGraph<NODE_VALUE_T,EDGE_VALUE_T> extends Graph<NODE_VALU
 
                     Node<NODE_VALUE_T> adj_node = adj_edge.getToDestination(node);
 
-                    if (predecessorGraph.compare(predecessorGraph.getNodeKey(adj_node),adj_edge) > 0)
+                    if (predecessorGraph.getPredecessorNode(adj_node).compareTo(adj_edge) > 0)
                     {
                         predecessorGraph.setNodePredecessor(adj_node,node);
                         predecessorGraph.setNodeKey(adj_node,adj_edge);
@@ -93,7 +93,6 @@ public class NonOrientedGraph<NODE_VALUE_T,EDGE_VALUE_T> extends Graph<NODE_VALU
                 }
             }
         }
-
 
         return predecessorGraph;
 
